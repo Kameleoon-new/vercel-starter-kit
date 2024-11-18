@@ -10,7 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@kameleoon/nodejs-sdk": "^2.6.3",
+    "@kameleoon/nodejs-sdk": "^5.1.0",
     "@vercel/edge-config": "^0.2.1",
     "@vercel/examples-ui": "^1.0.5",
     "next": "^13.2.4",

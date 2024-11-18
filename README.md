@@ -35,11 +35,15 @@ pnpm create next-app --example https://github.com/kameleoon/vercel-starter-kit/t
 
 Note: Before running locally, follow the section [Set up Kameleoon](#setup-kameleoon) to create an account, set up feature flags and obtain the Kameleoon `siteCode`.
 
-Set a `KAMELEOON_SITE_CODE` in `.env.example`, you can get it from Kameleoon platform. Then, copy the `.env.example` file in this directory to `.env.local` (which will be ignored by Git). Below is the command:
+Set a `KAMELEOON_SITE_CODE`, `KAMELEOON_CLIENT_ID`, `KAMELEOON_CLIENT_SECRET` and `EDGE_CONFIG` in `.env.example`, you can get it from Kameleoon platform. Then, copy the `.env.example` file in this directory to `.env.local` (which will be ignored by Git). Below is the command:
 
 ```bash
 cp .env.example .env.local
 ```
+
+- `KAMELEOON_SITE_CODE` is the site code of your Kameleoon project found in the [Kameleoon project dashboard.](https://app.kameleoon.com/projects/dashboard)
+- `KAMELEOON_CLIENT_ID` and `KAMELEOON_CLIENT_SECRET` are the client id and client secret of your Kameleoon account found in the profile settings.
+- `EDGE_CONFIG` also known as connection string can be set in your Vercel storage settings by following [this guide](https://vercel.com/docs/storage/edge-config/using-edge-config#using-a-connection-string). Note: that Kameleoon integration must be enabled in your Vercel project settings.
 
 Next, run Next.js in development mode:
 
@@ -55,7 +59,7 @@ You can use Kameleoon feature flags at the edge with [NextJS](https://nextjs.org
 
 ### Fetch client configuration
 
-The `externalClientConfiguration` is a JSON representation of feature flags and experiments. It contains all the data needed to deliver and track your flag deliveries and experiments. By using our [Kameleoon Integration](https://vercel.com/integrations/kameleoon), you can seamlessly bind your site's configuration to Vercel's Edge Config. Using your site code, it becomes straightforward to retrieve the client configuration from Edge Config.
+Kameleoon edge configuration is a JSON representation of feature flags and experiments. It contains all the data needed to deliver and track your flag deliveries and experiments. By using our [Kameleoon Integration](https://vercel.com/integrations/kameleoon), you can seamlessly bind your site's configuration to Vercel's Edge Config. Using your site code, it becomes straightforward to retrieve the client configuration from Edge Config.
 
 What sets this approach apart is the efficiency gained from Vercel's CDN. The Edge Config from Vercel ensures rapid fetching of client configurations, capitalizing on the speed and reliability of the Vercel Content Delivery Network.
 
