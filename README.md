@@ -17,6 +17,13 @@ https://feature-flag-kameleoon.vercel.app
 
 ## How to Use
 
+> [!IMPORTANT]
+> Before deploying or running this project, please complete the Vercel integration setup by following the official Kameleoon documentation:
+>
+> https://developers.kameleoon.com/setting-up-vercel/
+>
+> This step is required to correctly configure the Kameleoon integration, Edge Config, and environment variables used by this project.
+
 You can choose from one of the following two methods to use this repository:
 
 ### One-Click Deploy
