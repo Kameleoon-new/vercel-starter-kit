@@ -63,6 +63,10 @@ async function handleRequest(request: NextRequest, event: NextFetchEvent) {
       },
       configuration: {
         dataFileRefreshInterval: DATAFILE_UPDATE_INTERVAL_MINUTES,
+        // On a real website, share the visitor code cookie across subdomains
+        // with `cookieDomain: ".example.com"`. Leave it unset while testing on
+        // *.vercel.app: it is a public suffix, browsers reject cookies set for
+        // it and every request would get a new visitor code.
       },
       externals: {
         requester: new VercelRequester(),

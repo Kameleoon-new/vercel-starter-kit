@@ -42,13 +42,19 @@ cp .env.example .env.local
 pnpm dev
 ```
 
-Environment variables (`.env.local` locally, project settings on Vercel):
+### Environment variables
 
 | Variable | Required | Where to find it |
 | --- | --- | --- |
 | `KAMELEOON_SITE_CODE` | yes | [Kameleoon project dashboard](https://app.kameleoon.com/projects/dashboard) |
 | `KAMELEOON_CLIENT_ID`, `KAMELEOON_CLIENT_SECRET` | yes | Kameleoon profile settings, API credentials |
-| `GLOBAL_CONFIG` | with `DatafileSource.GlobalConfig` | Created automatically when you connect a Global Config store to the project. |
+| `GLOBAL_CONFIG` | with `DatafileSource.GlobalConfig` | Created automatically when you connect a Global Config store to the project (see below) |
+
+**Locally**, put them in `.env.local` (`cp .env.example .env.local`, then fill in the values) and restart `pnpm dev`; the file is read at startup and is ignored by git.
+
+**On Vercel**, the deploy button asks for the three `KAMELEOON_*` values. For a project you created yourself (importing the repository, or `vercel` from the CLI), add them under Project → Settings → Environment Variables, ticked for Production, Preview and Development, then redeploy: a deployment keeps the variables it was built with, so values added or changed afterwards only apply to the next deployment. A missing or empty variable shows up in the project logs as `[KAMELEOON] Falling back to the default page … Credentials`, and every visitor gets the default page.
+
+**`GLOBAL_CONFIG`** is not typed in by hand: connecting a Global Config store to the project (Storage → the store → Connect project, which the Kameleoon integration does for you) creates it with a connection string of the form `https://global-config.vercel.com/ecfg_…?token=…`. Any other value fails with `@vercel/global-config: Invalid connection string provided`. Without the integration leave it unset: the SDK logs `GLOBAL_CONFIG is not set` once and loads the configuration from the Kameleoon CDN, or set `DATAFILE_SOURCE` to `DatafileSource.Kameleoon` in `lib/constants.ts` to skip Global Config altogether.
 
 If your project still has `EDGE_CONFIG`, the variable name used before Vercel renamed Edge Config to [Global Config](https://vercel.com/docs/global-config/migration-guide), rename it to `GLOBAL_CONFIG`.
 
