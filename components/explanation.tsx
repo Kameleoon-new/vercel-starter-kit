@@ -1,41 +1,38 @@
-import { Layout, Text, Link } from '@vercel/examples-ui'
+const DOCS_URL =
+  "https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/nodejs-sdk";
 
-function Explanation() {
+export default function Explanation() {
   return (
-    <>
-      <Text variant="h2">How this example works</Text>
-      <Text>
-        This example shows two variants of pages. First one is the default home
-        page and the other one is new home page. It uses Kameleoon feature flag
-        in the Vercel Middleware to redirect user to correct pages. A unique
-        visitor id is being generated, stored in the cookie and reused so that
-        the decisions stick for the same browser session.
-        <br />
-        <br />
-        This example uses&nbsp;
-        <Link
-          href="https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/nodejs-sdk"
+    <section className="flex flex-col gap-4 text-zinc-700">
+      <h2 className="text-xl font-semibold text-zinc-900">
+        How this example works
+      </h2>
+      <p>
+        This example has two static pages: the default home page and a new
+        version of it. A Next.js <code>middleware.ts</code> evaluates the{" "}
+        <b>new_home_page</b> feature flag with the Kameleoon Node.js SDK before
+        the page is rendered and rewrites the request to the right page. A
+        visitor code is generated once, stored in a cookie and reused, so the
+        decision sticks for the same browser.
+      </p>
+      <p>
+        The flag configuration comes from Vercel Global Config, synced by the
+        Kameleoon integration. Exposure tracking is left to Engine.js on the
+        page by default, or sent by the middleware right after the response when{" "}
+        <code>TRACK_IN_MIDDLEWARE</code> is enabled.
+      </p>
+      <p>
+        See the{" "}
+        <a
+          className="underline hover:text-zinc-900"
+          href={DOCS_URL}
           target="_blank"
+          rel="noreferrer"
         >
-          Kameleoon NodeJS SDK
-        </Link>
-        &nbsp; inside Vercel Middleware to provide a starting point for you to
-        implement experimentation and feature flagging for your experiences at
-        the edge. For more information on how to run Feature Flags and
-        Experiments with our platform follow the steps outlined in our
-        documentation
-        <Link
-          href="https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/nodejs-sdk"
-          target="_blank"
-        >
-          &nbsp; here
-        </Link>
-        .
-      </Text>
-    </>
-  )
+          Kameleoon Node.js SDK documentation
+        </a>{" "}
+        to run feature flags and experiments with our platform.
+      </p>
+    </section>
+  );
 }
-
-Explanation.Layout = Layout
-
-export default Explanation

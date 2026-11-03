@@ -34,11 +34,10 @@ yarn-error.log*
 # Vercel
 .vercel
 
-# Turborepo
-.turbo
 
 # typescript
 *.tsbuildinfo
 
-# kameleoon
-/lib/kameleoon
+
+# Next.js 16 typegen output
+/next-env.d.ts
